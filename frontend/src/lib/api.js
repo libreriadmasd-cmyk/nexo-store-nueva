@@ -351,65 +351,6 @@ export const fetchProduct = async (sku) => {
   }
 };
 
-// ---------------- Admin ----------------
-export const adminLogin = async (password) => {
-  const r = await fetch(`${API}/admin/kits`, {
-    method: "POST", headers: headers(true), body: JSON.stringify(kit),
-  });
-  if (!r.ok) {
-    const e = await r.json().catch(() => ({}));
-    throw new Error(e.detail || "Error");
-  }
-  return r.json();
-};
-
-export const adminUpdateKit = async (id, patch) => {
-  const r = await fetch(`${API}/admin/kits/${id}`, {
-    method: "PUT", headers: headers(true), body: JSON.stringify(patch),
-  });
-  if (!r.ok) {
-    const e = await r.json().catch(() => ({}));
-    throw new Error(e.detail || "Error");
-  }
-  return r.json();
-};
-
-export const adminDeleteKit = async (id) => {
-  const r = await fetch(`${API}/admin/kits/${id}`, {
-    method: "DELETE", headers: headers(true),
-  });
-  if (!r.ok) throw new Error("Error");
-  return r.json();
-};
-
-export const adminUpdateStoreConfig = async (patch) => {
-  const r = await fetch(`${API}/admin/store-config`, {
-    method: "PUT",
-    headers: headers(true),
-    body: JSON.stringify(patch),
-  });
-  if (!r.ok) {
-    const e = await r.json().catch(() => ({}));
-    throw new Error(e.detail || "Error");
-  }
-  return r.json();
-};
-
-export const adminExtractAttributes = async () => {
-  const r = await fetch(`${API}/admin/extract-attributes`, {
-    method: "POST",
-    headers: headers(true),
-  });
-  if (!r.ok) throw new Error("Error");
-  return r.json();
-};
-
-export const fetchProduct = async (sku) => {
-  const r = await fetch(`${API}/products/${encodeURIComponent(sku)}`);
-  if (!r.ok) throw new Error("Producto no encontrado");
-  return r.json();
-};
-
 export const fetchCategories = async () => {
   const r = await fetch(`${API}/categories`);
   if (!r.ok) throw new Error("No se pudo cargar las categorías");
