@@ -1,4 +1,4 @@
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${(process.env.REACT_APP_BACKEND_URL || "https://tienda-profesional.preview.emergentagent.com").replace(/\/+$/, "")}/api`;
 
 const TOKEN_KEY = "nexo_admin_token";
 
