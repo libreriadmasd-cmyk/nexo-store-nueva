@@ -505,6 +505,57 @@ export const adminRemoveImage = async (sku, index) => {
   return r.json();
 };
 
+export const adminUpdateStoreConfig = async (body) => {
+  const r = await fetch(`${API}/admin/store-config`, {
+    method: "POST",
+    headers: headers(true),
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) {
+    const e = await r.json().catch(() => ({}));
+    throw new Error(e.detail || "Error");
+  }
+  return r.json();
+};
+
+export const adminCreateKit = async (kit) => {
+  const r = await fetch(`${API}/admin/kits`, {
+    method: "POST",
+    headers: headers(true),
+    body: JSON.stringify(kit),
+  });
+  if (!r.ok) {
+    const e = await r.json().catch(() => ({}));
+    throw new Error(e.detail || "Error");
+  }
+  return r.json();
+};
+
+export const adminUpdateKit = async (id, patch) => {
+  const r = await fetch(`${API}/admin/kits/${encodeURIComponent(id)}`, {
+    method: "PUT",
+    headers: headers(true),
+    body: JSON.stringify(patch),
+  });
+  if (!r.ok) {
+    const e = await r.json().catch(() => ({}));
+    throw new Error(e.detail || "Error");
+  }
+  return r.json();
+};
+
+export const adminDeleteKit = async (id) => {
+  const r = await fetch(`${API}/admin/kits/${encodeURIComponent(id)}`, {
+    method: "DELETE",
+    headers: headers(true),
+  });
+  if (!r.ok) {
+    const e = await r.json().catch(() => ({}));
+    throw new Error(e.detail || "Error");
+  }
+  return r.json();
+};
+
 export const searchSuggest = async (q, limit = 6) => {
   if (!q || !q.trim()) return { items: [] };
   const params = new URLSearchParams({ q: q.trim(), limit: String(limit) });
