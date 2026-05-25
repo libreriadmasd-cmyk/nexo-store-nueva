@@ -361,12 +361,12 @@ export const fetchCategories = async () => {
 export const adminLogin = async (password) => {
   const r = await fetch(`${API}/admin/login`, {
     method: "POST",
-    headers: headers(false),
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ password }),
   });
   if (!r.ok) {
     const e = await r.json().catch(() => ({}));
-    throw new Error(e.detail || "Contraseña incorrecta");
+    throw new Error(e.detail || "Error de autenticación");
   }
   const data = await r.json();
   setAdminToken(data.token);
